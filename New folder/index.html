@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>StarConnect Tickets — Celebrity Management & PR</title>
+  <meta name="description" content="Celebrity management, PR, and bookings for TV, events, and brand partnerships." />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.5rem;
+      text-decoration: none;
+      color: #000;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #000;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #000;
+      color: #fff;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .btn.secondary {
+      background: transparent;
+      border: 1px solid #000;
+      color: #000;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 20px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      height: 3px;
+      width: 100%;
+      background: #000;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* Mobile Nav */
+    #mobile-nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 280px;
+      height: 100%;
+      background: #fff;
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 1000;
+      padding: 70px 20px 20px;
+    }
+
+    #mobile-nav.active {
+      transform: translateX(0);
+    }
+
+    #mobile-nav ul {
+      list-style: none;
+      margin-top: 20px;
+    }
+
+    #mobile-nav li {
+      margin-bottom: 20px;
+    }
+
+    #mobile-nav a {
+      text-decoration: none;
+      font-size: 1.2rem;
+      color: #333;
+    }
+
+    #close-menu {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    /* Overlay */
+    #overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      z-index: 900;
+    }
+
+    #overlay.active {
+      display: block;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0;
+      background: #f8f9fa;
+    }
+
+    .hero-wrap {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    .hero-card {
+      flex: 1;
+    }
+
+    .hero-card img {
+      width: 100%;
+      border-radius: 14px;
+      object-fit: cover;
+    }
+
+    .pill {
+      display: inline-block;
+      background: #000;
+      color: #fff;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .muted {
+      color: #666;
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .services, .grid, .testimonials {
+      display: grid;
+      gap: 30px;
+    }
+
+    .services {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .icon {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    /* Contact */
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+
+    textarea {
+      min-height: 120px;
+    }
+
+    .form-message {
+      margin-top: 10px;
+      font-weight: 500;
+      color: green;
+    }
+
+    /* Footer */
+    footer {
+      background: #2c3e50;
+      color: #ccc;
+      padding: 30px 0;
+      text-align: center;
+    }
+
+    footer span {
+      color: #fff;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav ul, .nav-cta {
+        display: none;
+      }
+      .hamburger {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <a href="#" class="logo">StarConnect&nbsp;Tickets</a>
+
+      <!-- Desktop Nav -->
+      <nav class="desktop-nav" aria-label="Primary">
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#roster">Talent</a></li>
+          <li><a href="#testimonials">Clients</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-cta">
+        <a href="#contact" class="btn secondary">Enquire</a>
+      </div>
+
+      <!-- Mobile Nav -->
+      <nav id="mobile-nav" aria-label="Mobile">
+        <button id="close-menu" aria-label="Close navigation">✕</button>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#roster">Talent</a></li>
+          <li><a href="#testimonials">Clients</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="#contact" class="btn secondary">Enquire</a>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Open navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div id="overlay"></div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-wrap">
+      <div class="hero-text">
+        <span class="pill">Celebrity Management & PR</span>
+        <h1>About Us</h1>
+        <p>We know what it feels like to dream about meeting your favorite celebrity, being in the crowd at a once-in-a-lifetime show, or finally getting that selfie with the star who inspires you.</p>
+        <p>Our mission is simple: to connect fans with the celebrities they love, in the most fun, safe, and unforgettable way possible.</p>
+        <p>At the end of the day, it’s not just about tickets—it’s about moments, memories, and stories you’ll tell for a lifetime.</p>
+      </div>
+      <div class="hero-card">
+        <img src="https://images.unsplash.com/photo-1515169067865-5387ec356754?q=80&w=1200&auto=format&fit=crop"
+             alt="Excited audience at a concert">
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <div class="container">
+      <div class="section-head">
+        <h2>What we do</h2>
+        <p class="muted">Full-service representation for media, brands and events.</p>
+      </div>
+      <div class="services">
+        <article class="card"><div class="icon">🎬</div><h3>Meet and Greet</h3></article>
+        <article class="card"><div class="icon">🤝</div><h3>Private Bookings</h3></article>
+        <article class="card"><div class="icon">🎤</div><h3>Events & Appearances</h3></article>
+        <article class="card"><div class="icon">🎫</div><h3>VIP Tickets</h3></article>
+        <article class="card"><div class="icon">📅</div><h3>Show Bookings</h3></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roster -->
+  <section id="roster">
+    <div class="container">
+      <div class="section-head"><h2>Talent roster</h2></div>
+      <div class="grid">
+        <article class="card talent">
+          <img src="https://via.placeholder.com/250" alt="Jason Momoa at a movie premiere">
+          <h3>Jason Momoa</h3><p class="muted">Actor</p>
+        </article>
+        <article class="card talent">
+          <img src="https://via.placeholder.com/250" alt="Beyoncé performing live">
+          <h3>Beyoncé</h3><p class="muted">Singer</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials">
+    <div class="container">
+      <div class="section-head"><h2>What clients say</h2></div>
+      <div class="testimonials">
+        <article class="card">
+          <p class="quote">“Seamless from brief to broadcast. The team nailed our casting and handled everything impeccably.”</p>
+          <strong>Series Producer</strong>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container contact-form">
+      <h2>Make enquiry</h2>
+      <form id="messageForm">
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Your Name" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Your Email" required>
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+      <div id="formMessage" class="form-message"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; <span id="year"></span> StarConnect Tickets. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Nav elements
+    const hamburger = document.getElementById('hamburger');
+    const closeMenu = document.getElementById('close-menu');
+    const mobileNav = document.getElementById('mobile-nav');
+    const overlay = document.getElementById('overlay');
+
+    function openMobileNav() {
+      mobileNav.classList.add('active');
+      overlay.classList.add('active');
+      hamburger.setAttribute('aria-label', 'Close navigation');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileNav() {
+      mobileNav.classList.remove('active');
+      overlay.classList.remove('active');
+      hamburger.setAttribute('aria-label', 'Open navigation');
+      document.body.style.overflow = 'auto';
+    }
+
+    hamburger.addEventListener('click', openMobileNav);
+    closeMenu.addEventListener('click', closeMobileNav);
+    overlay.addEventListener('click', closeMobileNav);
+
+    // Contact form
+    const form = document.getElementById('messageForm');
+    const formMessage = document.getElementById('formMessage');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      formMessage.textContent = '✅ Thank you for your message. We will get back to you shortly.';
+      form.reset();
+    });
+  </script>
+</body>
+</html>
